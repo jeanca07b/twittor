@@ -67,15 +67,25 @@ self.addEventListener('activate', e => {
 
 
 self.addEventListener('fetch', e => {
+
+
     const respuesta = caches.match(e.request).then(res => {
+
         if (res) {
             return res;
         } else {
+
             return fetch(e.request).then(newRes => {
-                return actualizarCacheDinamico(DYNAMIC_CACHE, e.request, newRes);
+
+                return actualizaCacheDinamico(DYNAMIC_CACHE, e.request, newRes);
+
             });
+
         }
+
     });
+
+
 
     e.respondWith(respuesta);
 
