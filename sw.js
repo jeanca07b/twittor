@@ -54,9 +54,6 @@ self.addEventListener('activate', e => {
                 return caches.delete(key);
             }
 
-            if (key !== DYNAMIC_CACHE && key.includes('dynamic')) {
-                return caches.delete(key);
-            }
 
         });
 
@@ -78,7 +75,7 @@ self.addEventListener('fetch', e => {
 
             return fetch(e.request).then(newRes => {
 
-                return actualizarCacheDinamico(DYNAMIC_CACHE, e.request, newRes);
+                return actualizaCacheDinamico(DYNAMIC_CACHE, e.request, newRes);
 
             });
 
